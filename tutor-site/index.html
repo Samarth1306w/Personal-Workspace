@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Tutoring | 1-on-1 Academic Coaching & Test Prep</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-brand-500/20">
+          A
+        </div>
+        <div>
+          <span class="font-bold text-lg text-slate-900 tracking-tight">Apex Tutoring</span>
+          <span class="block text-xs font-medium text-slate-500">1-on-1 Personalized Coaching</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+        <a href="#subjects" class="hover:text-brand-600 transition">Subjects</a>
+        <a href="#method" class="hover:text-brand-600 transition">Our Method</a>
+        <a href="#testimonials" class="hover:text-brand-600 transition">Reviews</a>
+        <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
+        <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 rounded-lg shadow-sm hover:bg-brand-700 transition">
+          Book Free Assessment
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-white via-brand-50/40 to-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold">
+            <span class="flex h-2 w-2 rounded-full bg-brand-600"></span>
+            <span>Now Accepting Students for the New Term</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+            Master Any Subject.<br class="hidden sm:inline"/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Build Unstoppable Confidence.</span>
+          </h1>
+
+          <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Tailored 1-on-1 private tutoring for middle school, high school, and college students. Whether boosting grades from a C to an A or acing the SAT/ACT, we make learning click.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-bold text-white bg-brand-600 rounded-xl shadow-lg shadow-brand-600/25 hover:bg-brand-700 hover:shadow-brand-600/35 transition transform hover:-translate-y-0.5">
+              Book a Free Diagnostic Session
+            </a>
+            <a href="#subjects" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition">
+              Explore Subjects ↓
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center sm:text-left">
+            <div>
+              <div class="text-2xl font-black text-slate-900">98%</div>
+              <div class="text-xs text-slate-500 font-medium">Grade Improvement Rate</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-slate-900">100+</div>
+              <div class="text-xs text-slate-500 font-medium">Students Mentored</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-slate-900">4.9 / 5.0</div>
+              <div class="text-xs text-slate-500 font-medium">Parent Rating ★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Card Graphic -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md bg-white rounded-2xl shadow-xl shadow-slate-200 border border-slate-100 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-600 to-indigo-500 text-white flex items-center justify-center font-bold text-xl shadow-md">
+                🎓
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 text-lg">Lead Educator & Mentor</h3>
+                <p class="text-xs font-semibold text-slate-500">M.Sc. Mathematics &bull; 7+ Years Experience</p>
+              </div>
+            </div>
+
+            <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm">
+              <div class="flex items-center justify-between text-slate-700">
+                <span class="font-medium">📍 Formats</span>
+                <span class="font-bold text-slate-900">Online (Zoom) or In-Person</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-700">
+                <span class="font-medium">⏱️ Session Length</span>
+                <span class="font-bold text-slate-900">60 or 90 Minutes</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-700">
+                <span class="font-medium">🎯 Focus Areas</span>
+                <span class="font-bold text-brand-600">Math, STEM & Test Prep</span>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start space-x-3">
+              <span class="text-emerald-600 font-bold text-lg">✓</span>
+              <div>
+                <h4 class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Free First 30-Min Consultation</h4>
+                <p class="text-xs text-emerald-800 mt-0.5">We assess strengths, identify gaps, and craft a 60-day personalized roadmap before any commitment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Subjects Section -->
+  <section id="subjects" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Comprehensive Tutoring</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Subjects & Core Disciplines</h3>
+        <p class="mt-4 text-slate-600 text-base">From foundational middle-school concepts to high-level college prerequisites, we guide students step-by-step.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <!-- Subject Card 1 -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-500 hover:shadow-xl hover:shadow-brand-500/5 transition duration-300">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-6">
+            📐
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2">Mathematics</h4>
+          <p class="text-sm text-slate-600 mb-6">Transforming math anxiety into problem-solving mastery with structured problem breakdowns.</p>
+          <ul class="space-y-2.5 text-sm text-slate-700 font-medium">
+            <li class="flex items-center space-x-2"><span class="text-brand-600 font-bold">•</span><span>Pre-Algebra & Algebra I/II</span></li>
+            <li class="flex items-center space-x-2"><span class="text-brand-600 font-bold">•</span><span>Geometry & Trigonometry</span></li>
+            <li class="flex items-center space-x-2"><span class="text-brand-600 font-bold">•</span><span>AP Pre-Calculus & Calculus AB/BC</span></li>
+            <li class="flex items-center space-x-2"><span class="text-brand-600 font-bold">•</span><span>Statistics & Linear Algebra</span></li>
+          </ul>
+        </div>
+
+        <!-- Subject Card 2 -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-500 hover:shadow-xl hover:shadow-brand-500/5 transition duration-300">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-6">
+            🔬
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2">Sciences (STEM)</h4>
+          <p class="text-sm text-slate-600 mb-6">Deep conceptual understanding through practical examples, diagrams, and exam preparation.</p>
+          <ul class="space-y-2.5 text-sm text-slate-700 font-medium">
+            <li class="flex items-center space-x-2"><span class="text-emerald-600 font-bold">•</span><span>Physics (AP Physics 1, 2, C)</span></li>
+            <li class="flex items-center space-x-2"><span class="text-emerald-600 font-bold">•</span><span>Chemistry & AP Chemistry</span></li>
+            <li class="flex items-center space-x-2"><span class="text-emerald-600 font-bold">•</span><span>Biology & Environmental Science</span></li>
+            <li class="flex items-center space-x-2"><span class="text-emerald-600 font-bold">•</span><span>Lab Reports & Science Fair Projects</span></li>
+          </ul>
+        </div>
+
+        <!-- Subject Card 3 -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-500 hover:shadow-xl hover:shadow-brand-500/5 transition duration-300">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-6">
+            🎯
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2">Standardized Test Prep</h4>
+          <p class="text-sm text-slate-600 mb-6">Proven test-taking strategies, speed techniques, and targeted practice test reviews.</p>
+          <ul class="space-y-2.5 text-sm text-slate-700 font-medium">
+            <li class="flex items-center space-x-2"><span class="text-purple-600 font-bold">•</span><span>Digital SAT (Math & Reading)</span></li>
+            <li class="flex items-center space-x-2"><span class="text-purple-600 font-bold">•</span><span>ACT Preparation</span></li>
+            <li class="flex items-center space-x-2"><span class="text-purple-600 font-bold">•</span><span>AP Exams Review & Timing Strategies</span></li>
+            <li class="flex items-center space-x-2"><span class="text-purple-600 font-bold">•</span><span>College Admissions Advising</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Section -->
+  <section id="method" class="py-20 bg-slate-100/70 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Our 3-Step Process</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">How We Guarantee Results</h3>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-brand-600 text-white font-black text-lg flex items-center justify-center mx-auto mb-6">1</div>
+          <h4 class="font-bold text-lg text-slate-900 mb-2">Free Diagnostic Evaluation</h4>
+          <p class="text-sm text-slate-600">We analyze past homework, test scores, and learning habits to pinpoint the exact root causes of confusion.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-brand-600 text-white font-black text-lg flex items-center justify-center mx-auto mb-6">2</div>
+          <h4 class="font-bold text-lg text-slate-900 mb-2">Customized Action Plan</h4>
+          <p class="text-sm text-slate-600">No cookie-cutter worksheets. We tailor each weekly lesson directly to the student's upcoming school curriculum.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-brand-600 text-white font-black text-lg flex items-center justify-center mx-auto mb-6">3</div>
+          <h4 class="font-bold text-lg text-slate-900 mb-2">Grade Leap & Independence</h4>
+          <p class="text-sm text-slate-600">Students don't just pass the test; they learn how to study, manage time, and solve complex problems independently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Real Success Stories</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">What Parents & Students Say</h3>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div class="flex text-amber-400 text-lg">★★★★★</div>
+          <p class="text-sm text-slate-700 italic leading-relaxed">
+            "My daughter was failing AP Chemistry in October. After just 6 weeks of tutoring, she aced her midterm with an A- and actually looks forward to her lessons now!"
+          </p>
+          <div class="pt-2 border-t border-slate-200">
+            <h5 class="font-bold text-sm text-slate-900">Sarah Jenkins</h5>
+            <p class="text-xs text-slate-500">Parent of High School Junior</p>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div class="flex text-amber-400 text-lg">★★★★★</div>
+          <p class="text-sm text-slate-700 italic leading-relaxed">
+            "We improved my SAT math score by 140 points in under two months. The tips on time management and question shortcuts were game changers."
+          </p>
+          <div class="pt-2 border-t border-slate-200">
+            <h5 class="font-bold text-sm text-slate-900">Marcus T.</h5>
+            <p class="text-xs text-slate-500">Student, Admitted to NYU</p>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div class="flex text-amber-400 text-lg">★★★★★</div>
+          <p class="text-sm text-slate-700 italic leading-relaxed">
+            "Extremely patient, organized, and always available to answer a quick question before a big exam. Worth every single penny."
+          </p>
+          <div class="pt-2 border-t border-slate-200">
+            <h5 class="font-bold text-sm text-slate-900">David & Priya Patel</h5>
+            <p class="text-xs text-slate-500">Parents of 8th Grader</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-slate-100/70 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Transparent Rates</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Affordable Packages</h3>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        
+        <!-- Plan 1 -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-lg text-slate-900">Pay As You Go</h4>
+            <p class="text-xs text-slate-500 mt-1">Ideal for occasional homework review or single test prep.</p>
+            <div class="my-6">
+              <span class="text-4xl font-black text-slate-900">$50</span>
+              <span class="text-slate-500 text-sm">/ hour</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li class="flex items-center space-x-2"><span>✓</span><span>1-on-1 private session</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Session notes & summary</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Flexible cancellation</span></li>
+            </ul>
+          </div>
+          <a href="#contact" class="mt-8 block w-full py-3 text-center text-sm font-bold text-brand-600 bg-brand-50 rounded-xl hover:bg-brand-100 transition">Get Started</a>
+        </div>
+
+        <!-- Plan 2 (Popular) -->
+        <div class="bg-white p-8 rounded-2xl border-2 border-brand-600 shadow-xl relative flex flex-col justify-between">
+          <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Most Popular
+          </div>
+          <div>
+            <h4 class="font-bold text-lg text-slate-900">10-Session Block</h4>
+            <p class="text-xs text-slate-500 mt-1">Consistent weekly mastery with a personalized roadmap.</p>
+            <div class="my-6">
+              <span class="text-4xl font-black text-slate-900">$420</span>
+              <span class="text-slate-500 text-sm">($42/hr)</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li class="flex items-center space-x-2 font-semibold text-slate-900"><span>✓</span><span>Save $80 total</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Comprehensive diagnostic test</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Weekly parent progress reports</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Priority weekend scheduling</span></li>
+            </ul>
+          </div>
+          <a href="#contact" class="mt-8 block w-full py-3 text-center text-sm font-bold text-white bg-brand-600 rounded-xl hover:bg-brand-700 shadow-md transition">Claim 10-Session Pass</a>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-lg text-slate-900">Full Semester Pass</h4>
+            <p class="text-xs text-slate-500 mt-1">Complete grade turnaround & exam preparation.</p>
+            <div class="my-6">
+              <span class="text-4xl font-black text-slate-900">$750</span>
+              <span class="text-slate-500 text-sm">(20 Hours)</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li class="flex items-center space-x-2 font-semibold text-slate-900"><span>✓</span><span>Best value ($37.50/hr)</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Unlimited homework Q&A via chat</span></li>
+              <li class="flex items-center space-x-2"><span>✓</span><span>Practice test scoring & analysis</span></li>
+            </ul>
+          </div>
+          <a href="#contact" class="mt-8 block w-full py-3 text-center text-sm font-bold text-brand-600 bg-brand-50 rounded-xl hover:bg-brand-100 transition">Get Started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Booking Form -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-brand-900 to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <h3 class="text-3xl font-extrabold tracking-tight">Book Your Free 30-Minute Consultation</h3>
+          <p class="mt-3 text-slate-300 text-sm">Tell us about your student's goals and we will reach out within 12 hours with availability.</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Thank you! Your assessment request has been submitted. We will contact you shortly.');" class="space-y-4 max-w-xl mx-auto text-slate-800">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Parent / Student Name</label>
+              <input type="text" required placeholder="e.g. Jennifer Smith" class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+              <input type="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Phone Number</label>
+              <input type="tel" placeholder="(555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Student Grade / Level</label>
+              <select class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm">
+                <option>Middle School (Grades 6-8)</option>
+                <option>High School (Freshman/Sophomore)</option>
+                <option>High School (Junior/Senior)</option>
+                <option>College / University</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Subject(s) Needing Help</label>
+            <input type="text" placeholder="e.g. Algebra II, AP Chem, SAT Prep" class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Any Specific Goals or Notes</label>
+            <textarea rows="3" placeholder="Tell us what challenges they're facing or what exam they are preparing for..." class="w-full px-4 py-3 rounded-xl bg-white/95 border border-transparent focus:border-brand-500 focus:bg-white focus:outline-none text-sm"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 text-center text-base font-bold text-white bg-brand-600 rounded-xl hover:bg-brand-500 shadow-lg shadow-brand-600/30 transition">
+            Schedule Free Assessment Now →
+          </button>
+          <p class="text-center text-xs text-slate-400 mt-2">Zero obligation. 100% confidential.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 bg-slate-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-2xl font-bold text-center text-slate-900 mb-10">Frequently Asked Questions</h3>
+      <div class="space-y-4 text-sm">
+        <div class="bg-white p-6 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-900">How do online sessions work?</h4>
+          <p class="text-slate-600 mt-1">We use interactive virtual whiteboards and Zoom/Meet with screen sharing. Students can write out equations and solve problems in real-time, exactly like working side-by-side.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-900">What if we need to reschedule a lesson?</h4>
+          <p class="text-slate-600 mt-1">We understand busy family schedules. Lessons can be rescheduled with at least 24 hours notice with zero penalty.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-900">How quickly can we start?</h4>
+          <p class="text-slate-600 mt-1">Once you complete the free 30-minute consultation, we can typically schedule the first official tutoring lesson within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-10 text-xs border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <div class="w-6 h-6 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-xs">A</div>
+        <span class="font-bold text-slate-200">Apex Tutoring</span>
+        <span>&bull; &copy; 2026 All rights reserved.</span>
+      </div>
+      <div>
+        <span>Built with high-converting responsive design.</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
