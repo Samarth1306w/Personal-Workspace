@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Receptionist - Dr. Supriya Rai Dental Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; color: #f8fafc; }
+        .device { width: 100%; max-width: 420px; background: #1e293b; border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; display: flex; flex-direction: column; height: 680px; border: 1px solid #334155; }
+        .chat-header { background: #0284c7; padding: 18px 20px; display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 44px; height: 44px; background: #e0f2fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .header-info h2 { font-size: 16px; font-weight: 700; color: #ffffff; }
+        .header-info p { font-size: 12px; color: #bae6fd; display: flex; align-items: center; gap: 6px; }
+        .status-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; display: inline-block; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #0f172a; }
+        .msg { max-width: 82%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.5; }
+        .bot-msg { background: #1e293b; color: #f1f5f9; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155; }
+        .user-msg { background: #0284c7; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .quick-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .btn-option { background: #334155; color: #38bdf8; border: 1px solid #0284c7; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .btn-option:hover { background: #0284c7; color: white; }
+        .chat-input { padding: 14px 16px; background: #1e293b; display: flex; gap: 10px; border-top: 1px solid #334155; }
+        .chat-input input { flex: 1; background: #0f172a; border: 1px solid #334155; color: white; padding: 12px 16px; border-radius: 24px; outline: none; font-size: 14px; }
+        .chat-input button { background: #0284c7; color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .badge { background: #059669; color: white; font-size: 11px; padding: 4px 8px; border-radius: 12px; margin-left: auto; }
+    </style>
+</head>
+<body>
+    <div class="device">
+        <div class="chat-header">
+            <div class="avatar">🤖</div>
+            <div class="header-info">
+                <h2>Dr. Supriya Rai Dental Clinic</h2>
+                <p><span class="status-dot"></span> 24/7 AI Receptionist</p>
+            </div>
+            <span class="badge">Live Preview</span>
+        </div>
+        <div class="chat-messages" id="messages">
+            <div class="msg bot-msg">
+                Hello! Welcome to <strong>Dr. Supriya Rai Dental Clinic</strong>. 👋<br><br>
+                I am your 24/7 Virtual Assistant. How can I help you today?
+                <div class="quick-options">
+                    <button class="btn-option" onclick="reply('📅 Book an Appointment')">📅 Book Appointment</button>
+                    <button class="btn-option" onclick="reply('💰 Treatment Pricing')">💰 Check Prices</button>
+                    <button class="btn-option" onclick="reply('📍 Timings & Location')">📍 Timings & Clinic</button>
+                    <button class="btn-option" onclick="reply('💬 WhatsApp Support')">💬 WhatsApp Support</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a question..." onkeydown="if(event.key==='Enter') sendText()">
+            <button onclick="sendText()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        function reply(text) {
+            addUserMsg(text);
+            setTimeout(() => {
+                if (text.includes('Book')) {
+                    addBotMsg("Great! What day works best for your visit? (e.g. Tomorrow 4 PM, Saturday Morning) or tap below to confirm your WhatsApp number.");
+                } else if (text.includes('Pricing')) {
+                    addBotMsg("Consultations start from ₹500. Routine cleanings & treatments range from ₹1,200 to ₹3,500. Would you like a specific quote for a procedure?");
+                } else if (text.includes('Timings')) {
+                    addBotMsg("We are open Monday to Saturday from 9:30 AM to 8:30 PM, and Sunday by appointment. Location: Central Indiranagar, Bangalore.");
+                } else if (text.includes('WhatsApp')) {
+                    addBotMsg("You can connect directly with our staff on WhatsApp at: +91 6361209256");
+                } else {
+                    addBotMsg("Thank you! Our AI assistant can capture your phone number and have the doctor's team confirm within 5 minutes.");
+                }
+            }, 600);
+        }
+
+        function sendText() {
+            const input = document.getElementById('userInput');
+            const val = input.value.trim();
+            if(!val) return;
+            input.value = '';
+            reply(val);
+        }
+
+        function addUserMsg(t) {
+            const d = document.getElementById('messages');
+            const m = document.createElement('div');
+            m.className = 'msg user-msg';
+            m.innerText = t;
+            d.appendChild(m);
+            d.scrollTop = d.scrollHeight;
+        }
+
+        function addBotMsg(h) {
+            const d = document.getElementById('messages');
+            const m = document.createElement('div');
+            m.className = 'msg bot-msg';
+            m.innerHTML = h;
+            d.appendChild(m);
+            d.scrollTop = d.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Receptionist Interactive Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: #090d16; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .banner { background: rgba(2, 132, 199, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 12px 20px; font-size: 13px; color: #38bdf8; margin-bottom: 20px; text-align: center; max-width: 420px; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .banner a { color: #ffffff; font-weight: 700; text-decoration: underline; }
+        .device { width: 100%; max-width: 400px; height: 620px; background: #0f172a; border-radius: 28px; border: 1px solid #334155; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); display: flex; flex-direction: column; overflow: hidden; }
+        .chat-header { background: #0284c7; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .info h2 { font-size: 15px; font-weight: 700; color: white; }
+        .info p { font-size: 12px; color: #bae6fd; display: flex; align-items: center; gap: 5px; }
+        .dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; }
+        .chat-messages { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #090d16; }
+        .msg { max-width: 84%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.45; }
+        .bot { background: #1e293b; color: #f1f5f9; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .user { background: #0284c7; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .chip { background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; }
+        .chip:hover { background: #0284c7; color: white; }
+        .input-bar { background: #1e293b; padding: 12px; display: flex; gap: 8px; border-top: 1px solid #334155; }
+        .input-bar input { flex: 1; background: #090d16; border: 1px solid #334155; color: white; padding: 10px 14px; border-radius: 20px; font-size: 13px; outline: none; }
+        .input-bar button { background: #0284c7; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; }
+        .footer-note { font-size: 12px; color: #64748b; margin-top: 16px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <span>⚡ Interactive Demo Preview</span>
+        <a href="proposal.html">View Proposal & Pricing →</a>
+    </div>
+
+    <div class="device">
+        <div class="chat-header">
+            <div class="avatar">🏥</div>
+            <div class="info">
+                <h2 id="clinicNameDisplay">Apex Dental Centre</h2>
+                <p><span class="dot"></span> 24/7 AI Receptionist</p>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatArea">
+            <div class="msg bot">
+                Hello! Welcome to <strong id="clinicWelcome">Apex Dental Centre</strong>. 👋<br><br>
+                How can I assist you with your appointment or inquiry today?
+                <div class="chips">
+                    <button class="chip" onclick="handleChip('📅 Book an Appointment')">📅 Book Appointment</button>
+                    <button class="chip" onclick="handleChip('💰 Check Treatment Pricing')">💰 Check Prices</button>
+                    <button class="chip" onclick="handleChip('📍 Timings & Location')">📍 Timings & Clinic</button>
+                    <button class="chip" onclick="handleChip('💬 WhatsApp Staff')">💬 WhatsApp Staff</button>
+                </div>
+            </div>
+        </div>
+        <div class="input-bar">
+            <input type="text" id="userInput" placeholder="Ask about appointments, prices..." onkeydown="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Powered by <strong>Samarth Automations</strong> • WhatsApp: +91 6361209256
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clinic = params.get('clinic') || 'Apex Dental Centre';
+        const city = params.get('city') || 'Bangalore';
+        const phone = params.get('phone') || '+91 6361209256';
+
+        document.getElementById('clinicNameDisplay').innerText = clinic;
+        document.getElementById('clinicWelcome').innerText = clinic;
+        document.title = `AI Receptionist Demo - ${clinic}`;
+
+        function handleChip(text) {
+            addUserMsg(text);
+            setTimeout(() => {
+                if (text.includes('Book')) {
+                    addBotMsg(`I'd be happy to schedule your consultation at ${clinic}! What time works best for you? (e.g., Tomorrow at 5 PM or this Saturday).`);
+                } else if (text.includes('Price') || text.includes('Pricing')) {
+                    addBotMsg(`Consultation and check-ups start at ₹500. Specific treatment estimates (cleaning, root canal, alignment) depend on clinical examination. Would you like to reserve a diagnostic slot?`);
+                } else if (text.includes('Timing')) {
+                    addBotMsg(`${clinic} is open Monday to Saturday from 9:30 AM to 8:30 PM in ${city}.`);
+                } else if (text.includes('WhatsApp')) {
+                    addBotMsg(`You can connect directly with our clinic staff on WhatsApp at: ${phone}`);
+                } else {
+                    addBotMsg(`Thank you! Our AI has noted your request for ${clinic}. Please share your name and mobile number to confirm.`);
+                }
+            }, 550);
+        }
+
+        function sendMsg() {
+            const input = document.getElementById('userInput');
+            const val = input.value.trim();
+            if(!val) return;
+            input.value = '';
+            handleChip(val);
+        }
+
+        function addUserMsg(t) {
+            const d = document.getElementById('chatArea');
+            const m = document.createElement('div');
+            m.className = 'msg user';
+            m.innerText = t;
+            d.appendChild(m);
+            d.scrollTop = d.scrollHeight;
+        }
+
+        function addBotMsg(h) {
+            const d = document.getElementById('chatArea');
+            const m = document.createElement('div');
+            m.className = 'msg bot';
+            m.innerHTML = h;
+            d.appendChild(m);
+            d.scrollTop = d.scrollHeight;
+        }
+    </script>
+</body>
+</html>
