@@ -213,13 +213,6 @@ UPI_PAYMENT_ID="6361209256@ibl"
 - Created [`src/lib/email/gmail.ts`](file:///workspaces/Personal-Workspace/src/lib/email/gmail.ts) supporting connection verification, client cold outreach pitches, and automated quote follow-ups.
 - Verified live delivery with `scripts/test-gmail.ts` — confirmed successful delivery directly into `samarthknimangre@gmail.com`.
 
-### Phase 7: Apex Air & Plumbing Client Deployment (Bridge Builders Benchmark)
-- Implemented Florida two-party consent gate ([`src/lib/telephony/consent-gate.ts`](file:///workspaces/Personal-Workspace/src/lib/telephony/consent-gate.ts)) with DTMF 1 verification and mid-call DTMF 9 revocation.
-- Authored Mike Reynolds' approved knowledge base ([`src/lib/telephony/apex-knowledge.ts`](file:///workspaces/Personal-Workspace/src/lib/telephony/apex-knowledge.ts)) with deterministic question matching ($89 diagnostic fee, emergency dispatch rules).
-- Built Twilio voice webhook route ([`src/app/api/clients/apex-hvac/voice/route.ts`](file:///workspaces/Personal-Workspace/src/app/api/clients/apex-hvac/voice/route.ts)) with fail-closed timeout and human transfer fallback.
-- Created high-converting public trade website ([`src/app/demos/apex-hvac/page.tsx`](file:///workspaces/Personal-Workspace/src/app/demos/apex-hvac/page.tsx)) with interactive AI Customer Assistant widget.
-- Created Mike's BridgeView Client Portal ([`src/app/demos/apex-hvac/portal/page.tsx`](file:///workspaces/Personal-Workspace/src/app/demos/apex-hvac/portal/page.tsx)) featuring real-time call feed, audio playback, on-call van dispatcher, and approved knowledge rules.
-
 ---
 
 ## 🛠️ Operational Runbook & Commands
