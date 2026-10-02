@@ -24,9 +24,26 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  let body: Record<string, unknown>;
   try {
-    const body = await req.json();
+    body = await req.json();
+  } catch {
+    recordFailure(rateLimitKey, 10 * 60 * 1000);
+    return NextResponse.json(
+      { success: false, error: "Invalid JSON request body." },
+      { status: 400 }
+    );
+  }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    recordFailure(rateLimitKey, 10 * 60 * 1000);
+    return NextResponse.json(
+      { success: false, error: "Invalid request payload format." },
+      { status: 400 }
+    );
+  }
+
+  try {
     // Honeypot anti-spam check
     if (body.website_trap || body._gotcha) {
       return NextResponse.json({ success: true, message: "Inquiry received." });
@@ -36,21 +53,22 @@ export async function POST(req: NextRequest) {
 
     // Validate name
     if (!name || typeof name !== "string" || name.trim().length < 2) {
+      recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide your name (at least 2 characters)." }, { status: 400 });
     }
 
     // Validate email if provided
     const cleanEmail = typeof email === "string" && email.trim() ? email.trim() : undefined;
     if (cleanEmail && !EMAIL_REGEX.test(cleanEmail)) {
+      recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide a valid email address." }, { status: 400 });
     }
 
     // Validate message
     if (!message || typeof message !== "string" || message.trim().length < 5) {
+      recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide a descriptive message (at least 5 characters)." }, { status: 400 });
     }
-
-    recordFailure(rateLimitKey, 10 * 60 * 1000);
 
     const savedInquiry = await createInquiry({
       name: name.trim().slice(0, 150),

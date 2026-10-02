@@ -8,7 +8,7 @@ import { exploringData, ExplorationItem } from "@/data/exploring";
 import { milestonesData, Milestone } from "@/data/milestones";
 import { socialsData, SocialLink, CONTACT_CONFIG } from "@/data/socials";
 import { assistantKnowledgeBase, KnowledgeQnA } from "@/data/assistantKnowledge";
-import { createServerClient } from "@/lib/supabase/server";
+import { createServerClient, createPublicClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export type { KnowledgeQnA, ServiceOffering };
@@ -163,7 +163,7 @@ function writeLocalStore(data: LocalStoreSchema): void {
 // PROFILE API
 // -----------------------------------------------------------------------------
 export async function getProfile(): Promise<ProfileData> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("profiles").select("*").eq("id", "samarth-profile").single();
     if (data) {
@@ -222,7 +222,7 @@ export async function updateProfile(updated: Partial<ProfileData>, actorEmail = 
 // SERVICES API
 // -----------------------------------------------------------------------------
 export async function getServices(): Promise<ServiceOffering[]> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("services").select("*").order("order_index", { ascending: true });
     if (data && data.length > 0) {
@@ -299,7 +299,7 @@ export async function getCapabilities(): Promise<{
   exploringStack: TechItem[];
   coreCapabilities: CapabilityItem[];
 }> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("site_settings").select("value").eq("key", "capabilities").maybeSingle();
     if (data && data.value) {
@@ -340,6 +340,7 @@ export async function updateCapabilities(
       key: "capabilities",
       value: store.capabilities,
       updated_at: new Date().toISOString(),
+      is_public: true,
     });
   }
 
@@ -350,7 +351,7 @@ export async function updateCapabilities(
 // PROJECTS API
 // -----------------------------------------------------------------------------
 export async function getProjects(includeDrafts = false): Promise<ExtendedProject[]> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     let query = supabase.from("projects").select("*").order("created_at", { ascending: false });
     if (!includeDrafts) {
@@ -742,7 +743,7 @@ export async function getAnalyticsSummary(rangeDays = 7): Promise<{
 // SOCIALS API
 // -----------------------------------------------------------------------------
 export async function getSocialLinks(): Promise<SocialLink[]> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("social_links").select("*").eq("is_visible", true).order("priority", { ascending: true });
     if (data && data.length > 0) {
@@ -796,7 +797,7 @@ export async function saveSocialLink(social: SocialLink, actorEmail = "samarthkn
 // EXPLORING TOPICS API
 // -----------------------------------------------------------------------------
 export async function getExploringTopics(): Promise<ExplorationItem[]> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("exploring_topics").select("*").eq("is_visible", true).order("order_index", { ascending: true });
     if (data && data.length > 0) {
@@ -856,7 +857,7 @@ export async function deleteExploringTopic(name: string, actorEmail = "samarthkn
 // KNOWLEDGE BASE API (ASK SAM)
 // -----------------------------------------------------------------------------
 export async function getAssistantKnowledge(): Promise<KnowledgeQnA[]> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("assistant_knowledge").select("*").eq("status", "PUBLISHED").order("order_index", { ascending: true });
     if (data && data.length > 0) {
@@ -916,7 +917,7 @@ export async function deleteAssistantKnowledge(id: string, actorEmail = "samarth
 // SITE SETTINGS API
 // -----------------------------------------------------------------------------
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const supabase = await createServerClient();
+  const supabase = createPublicClient();
   if (supabase) {
     const { data } = await supabase.from("site_settings").select("value").eq("key", "global_settings").maybeSingle();
     if (data && data.value) {
@@ -939,6 +940,7 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>, actorE
       key: "global_settings",
       value: store.settings,
       updated_at: new Date().toISOString(),
+      is_public: true,
     });
   }
 

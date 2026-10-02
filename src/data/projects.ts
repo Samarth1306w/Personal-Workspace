@@ -100,7 +100,7 @@ export const projectsData: Project[] = [
       },
     ],
     githubUrl: "https://github.com/Sam-CodesAI/teleflow-agent",
-    liveUrl: "/admin/inquiries",
+    liveUrl: "https://t.me/samarth_master_bot",
   },
 ];
 

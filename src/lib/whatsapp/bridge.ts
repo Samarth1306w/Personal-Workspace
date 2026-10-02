@@ -3,7 +3,7 @@
  * Connected to dedicated client intake number: +91 8550816706.
  * Features:
  * - 24/7 Cloud Session Auto-Sync & Restore via Supabase
- * - Grounded Gemini 3.1 Flash-Lite AI with Full System Knowledge
+ * - Grounded Gemini 2.0 Flash AI with Full System Knowledge
  * - Instant Lead Extraction & Supabase Inquiries CRM Insertion
  * - Real-Time Telegram Push Alerts to Samarth (@Samarth1306)
  * - Lightweight HTTP /health listener for Cloud Platforms (Render, Railway, Fly.io)
@@ -20,6 +20,7 @@ import QRCode from "qrcode";
 import path from "node:path";
 import fs from "node:fs";
 import http from "node:http";
+import crypto from "node:crypto";
 
 import {
   syncWhatsAppAuthToCloud,
@@ -113,7 +114,7 @@ async function buildWhatsAppSystemPrompt(clientName: string, clientPhone: string
   - Live Checkout Conversion Demo: https://sam-codes.vercel.app/demos/dokumentko
   - Architecture Call: ${CONTACT_CONFIG.CAL_URL}
 • Payment Methods:
-  - India: UPI ID '6361209256@ibl' or NEFT/IMPS
+  - India: UPI ID '${process.env.UPI_PAYMENT_ID || "6361209256@ibl"}' or NEFT/IMPS
   - International: PayPal, Stripe credit card invoice, or Wise
   - Terms: Micro-fixes (100% on live demo test). Larger builds (50% deposit / 50% on launch).
 
@@ -151,7 +152,7 @@ Output ONLY JSON. Do not wrap in markdown backticks.`;
 }
 
 /**
- * Formulate response using Gemini 3.1 Flash-Lite, with deterministic knowledge fallback.
+ * Formulate response using Gemini 2.0 Flash, with deterministic knowledge fallback.
  */
 async function generateIntelligentWhatsAppReply(
   incomingText: string,
@@ -277,7 +278,10 @@ function ensureCloudHealthServer() {
 
   try {
     const server = http.createServer((req, res) => {
-      if (req.url === "/health" || req.url === "/") {
+      const reqUrl = req.url || "/";
+      const pathname = reqUrl.split("?")[0].replace(/\/+$/, "") || "/";
+
+      if (pathname === "/health" || pathname === "/" || pathname === "") {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(
           JSON.stringify({
@@ -291,23 +295,102 @@ function ensureCloudHealthServer() {
         return;
       }
 
-      if (req.url === "/send" && req.method === "POST") {
+      if (pathname === "/send" && req.method === "POST") {
+        // 1. Verify authentication: Bearer token or x-api-key header (case-insensitive prefix & constant-time check)
+        const authHeader = req.headers["authorization"] || "";
+        const apiKeyHeader = req.headers["x-api-key"] || "";
+        const expectedSecret = process.env.WHATSAPP_BRIDGE_SECRET || process.env.ADMIN_SECRET_KEY;
+
+        const authStr = typeof authHeader === "string" ? authHeader.trim() : "";
+        const token =
+          authStr.toLowerCase().startsWith("bearer ")
+            ? authStr.slice(7).trim()
+            : typeof apiKeyHeader === "string"
+            ? apiKeyHeader.trim()
+            : Array.isArray(apiKeyHeader)
+            ? apiKeyHeader[0]?.trim() || ""
+            : "";
+
+        let isAuthed = false;
+        if (expectedSecret && token) {
+          const expectedBuf = Buffer.from(expectedSecret);
+          const tokenBuf = Buffer.from(token);
+          if (expectedBuf.length === tokenBuf.length && crypto.timingSafeEqual(expectedBuf, tokenBuf)) {
+            isAuthed = true;
+          }
+        }
+
+        if (!isAuthed) {
+          res.writeHead(401, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ success: false, error: "Unauthorized: Invalid or missing API secret" }));
+          return;
+        }
+
+        // 2. Request payload size limiting (64 KB maximum)
+        const MAX_PAYLOAD_BYTES = 64 * 1024;
+        const rawContentLength = req.headers["content-length"];
+        const parsedContentLength = rawContentLength ? parseInt(String(rawContentLength), 10) : 0;
+        const contentLength = Number.isFinite(parsedContentLength) ? parsedContentLength : 0;
+
+        if (contentLength > MAX_PAYLOAD_BYTES) {
+          res.writeHead(413, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ success: false, error: "Payload too large. Maximum allowed size is 64KB." }));
+          req.destroy();
+          return;
+        }
+
         let body = "";
+        let receivedBytes = 0;
+        let isAborted = false;
+
+        req.on("error", () => {
+          if (!res.headersSent) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, error: "Client request stream error" }));
+          }
+        });
+
         req.on("data", (chunk) => {
+          if (isAborted) return;
+          receivedBytes += chunk.length;
+          if (receivedBytes > MAX_PAYLOAD_BYTES) {
+            isAborted = true;
+            res.writeHead(413, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, error: "Payload too large. Maximum allowed size is 64KB." }));
+            req.destroy();
+            return;
+          }
           body += chunk;
         });
+
         req.on("end", async () => {
+          if (isAborted) return;
+          let parsed: Record<string, unknown>;
           try {
-            const parsed = JSON.parse(body);
-            const { phone, text } = parsed;
-            if (!phone || !text) {
-              res.writeHead(400, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ success: false, error: "phone and text are required" }));
-              return;
-            }
-            const ok = await sendOutboundWhatsApp(phone, text);
+            parsed = JSON.parse(body);
+          } catch {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, error: "Malformed JSON payload" }));
+            return;
+          }
+
+          if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, error: "Payload must be a JSON object" }));
+            return;
+          }
+
+          const { phone, text } = parsed;
+          if (typeof phone !== "string" || !phone.trim() || typeof text !== "string" || !text.trim()) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, error: "phone and text must be non-empty strings" }));
+            return;
+          }
+
+          try {
+            const ok = await sendOutboundWhatsApp(phone.trim(), text.trim());
             res.writeHead(ok ? 200 : 500, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ success: ok, targetPhone: phone }));
+            res.end(JSON.stringify({ success: ok, targetPhone: phone.trim() }));
           } catch (err: unknown) {
             const msg = err instanceof Error ? err.message : String(err);
             res.writeHead(500, { "Content-Type": "application/json" });
@@ -400,7 +483,7 @@ export async function startWhatsAppBridge(): Promise<WASocket> {
       await sendTelegramAlert(
         `🟢 *WhatsApp Agent Bridge ONLINE (Cloud-Synced)*\n\n` +
         `Target Number: \`+${TARGET_PHONE_NUMBER}\`\n` +
-        `Unified System Knowledge & Gemini 3.1 AI are active 24/7.`
+        `Unified System Knowledge & Gemini 2.0 Flash AI are active 24/7.`
       );
     }
   });
@@ -460,6 +543,10 @@ export async function startWhatsAppBridge(): Promise<WASocket> {
 export async function sendOutboundWhatsApp(phone: string, text: string): Promise<boolean> {
   if (!activeSocket) {
     console.error("[WhatsApp Bridge] Socket not active.");
+    return false;
+  }
+  if (typeof phone !== "string" || typeof text !== "string") {
+    console.error("[WhatsApp Bridge] Invalid phone or text format.");
     return false;
   }
   let cleanPhone = phone.replace(/[^0-9]/g, "");

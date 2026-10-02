@@ -9,7 +9,7 @@
 -- ------------------------------------------------------------------------------
 
 -- Add is_public flag to site_settings to prevent leaking administrative configurations
-ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS is_public BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS is_public BOOLEAN NOT NULL DEFAULT false;
 
 -- Hardened Constraints on Inquiries (prevent spam, oversized payloads, invalid emails)
 DO $$

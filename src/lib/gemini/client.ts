@@ -168,8 +168,8 @@ export async function callGeminiApi(options: GeminiGenerateOptions): Promise<str
     throw new Error("GEMINI_API_KEY is not configured.");
   }
 
-  // Model preferences: prefer gemini-3.1-flash-lite (fastest ~2s), fallback to gemini-3.5-flash and gemini-3.6-flash
-  const models = ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"];
+  // Model preferences: prefer gemini-2.0-flash, fallback to gemini-2.0-flash-lite and gemini-1.5-flash
+  const models = ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"];
   let lastError: Error | null = null;
 
   for (const model of models) {
@@ -260,7 +260,7 @@ export async function validateGeminiApiKey(apiKey: string): Promise<GeminiValida
     const latencyMs = Date.now() - startTime;
     return {
       valid: true,
-      model: "gemini-3.1-flash-lite",
+      model: "gemini-2.0-flash",
       latencyMs,
     };
   } catch (err: unknown) {

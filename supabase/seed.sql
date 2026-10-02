@@ -38,15 +38,21 @@ INSERT INTO profiles (
 
 -- 2. Services
 INSERT INTO services (id, title, short_description, full_description, deliverables, typical_delivery, cta_label, cta_link, is_available, order_index, status) VALUES
-('ai-assistants', 'AI Chatbots & Assistants', 'Helpful conversational tools grounded in your real business information', 'Custom assistants for your website or app that answer user questions, explain products, guide visitors, and gather inquiries around the clock.', '["Custom system prompt tailored to your brand voice", "Knowledge retrieval from your documents, FAQs, or site", "Lead collection and structured inquiry handoff", "Clean embed widget matching your website design"]'::jsonb, '2–5 days', 'Start a conversation', '#contact', true, 1, 'PUBLISHED'),
-('business-automation', 'Workflow & Business Automation', 'Connecting your software so repetitive tasks run themselves', 'Automated pipelines that connect your tools — automatically qualifying leads, routing notifications, syncing spreadsheets, and updating databases.', '["Multi-app triggers (Stripe, Slack, Notion, Airtable, Sheets)", "Automated lead triage and notification routing", "Scheduled data syncs and background batch processing", "Reliable error handling and alert notifications"]'::jsonb, '2–5 days', 'Start a conversation', '#contact', true, 2, 'PUBLISHED'),
-('websites-webapps', 'Websites & Modern Web Applications', 'Fast, responsive web experiences designed with care', 'Modern, mobile-friendly landing pages and interactive web applications built with Next.js and Tailwind CSS. Focused on clarity, speed, and turning visitors into conversations.', '["Mobile-first, responsive layouts tested across screen sizes", "Performance-conscious web engineering with zero bloat", "Clean metadata, OpenGraph tags, and SEO foundations", "Global deployment on Vercel with custom domain setup"]'::jsonb, '3–7 days', 'Start a conversation', '#contact', true, 3, 'PUBLISHED'),
-('rapid-mvps', 'Rapid Prototypes & Working MVPs', 'From concept to interactive software to validate your idea', 'For founders, creators, and teams who want to test a concept with real users. I build functional, clickable working prototypes in days so you can gather real feedback.', '["Quick turnaround from idea to functional demo link", "Interactive core flows to test with real users", "Clean, modular TypeScript code structured to grow", "Direct collaboration and regular preview updates"]'::jsonb, '3–7 days', 'Start a conversation', '#contact', true, 4, 'PUBLISHED')
+('micro-fixes-automation', 'Micro-Fixes & Script Automation', 'Rapid bug fixes, Python scrapers, and webhook repairs delivered in hours', 'For founders, store owners, and freelancers who need a quick engineering fix, API connection, data scraping script, or checkout repair without delays.', '["Same-day bug investigation and surgical code patch", "Custom Python scraping scripts or data extractors", "API webhook debugging and error alert routing", "Video walkthrough or live test verification before payment"]'::jsonb, 'Same-day (6–12 hrs)', 'Start a conversation', '#contact', true, 1, 'PUBLISHED'),
+('business-automation', 'Workflow & Business Automation', 'Connecting your software so repetitive tasks run themselves', 'Automated pipelines that connect your tools — automatically qualifying leads, routing notifications, syncing spreadsheets, and updating databases.', '["Multi-app triggers (Stripe, Slack, WhatsApp, Notion, Airtable, Sheets)", "Automated lead triage and notification routing", "Scheduled data syncs and background batch processing", "Reliable error handling and alert notifications to your phone"]'::jsonb, '24–48 hrs', 'Start a conversation', '#contact', true, 2, 'PUBLISHED'),
+('ai-assistants', 'AI Chatbots & Autonomous Agents', 'Helpful conversational tools grounded in your real business information', 'Custom 24/7 assistants for your website, Telegram, or WhatsApp that answer user questions, explain products, guide visitors, and gather inquiries around the clock.', '["Custom system prompt tailored to your brand voice & policies", "Knowledge retrieval from your documents, FAQs, or site (RAG)", "Automated lead qualification and CRM database insertion", "Real-time push alerts to your personal Telegram or WhatsApp"]'::jsonb, '2–4 days', 'Start a conversation', '#contact', true, 3, 'PUBLISHED'),
+('websites-webapps', 'Websites & Modern Web Applications', 'Fast, responsive web experiences designed with care', 'Modern, mobile-friendly landing pages and interactive web applications built with Next.js 16 and Tailwind CSS. Focused on clarity, sub-2s load times, and turning visitors into paying clients.', '["Mobile-first, responsive layouts tested across all screen sizes", "95+ Google PageSpeed performance with zero Cumulative Layout Shift", "Clean metadata, OpenGraph tags, and SEO foundations", "Global deployment on Vercel with custom domain setup & SSL"]'::jsonb, '3–5 days', 'Start a conversation', '#contact', true, 4, 'PUBLISHED'),
+('rapid-mvps', 'Rapid Prototypes & Working MVPs', 'From concept to interactive software to validate your idea', 'For founders, creators, and teams who want to test a concept with real users. I build functional, clickable working prototypes with auth and database in days so you can gather real feedback.', '["Quick turnaround from idea to functional demo link", "Interactive core flows with Supabase auth and database tables", "Clean, modular TypeScript code structured to grow into production", "Direct collaboration, preview links, and post-launch revision support"]'::jsonb, '5–10 days', 'Start a conversation', '#contact', true, 5, 'PUBLISHED')
 ON CONFLICT (id) DO UPDATE SET
   title = EXCLUDED.title,
   short_description = EXCLUDED.short_description,
   full_description = EXCLUDED.full_description,
   deliverables = EXCLUDED.deliverables,
+  typical_delivery = EXCLUDED.typical_delivery,
+  cta_label = EXCLUDED.cta_label,
+  cta_link = EXCLUDED.cta_link,
+  is_available = EXCLUDED.is_available,
+  order_index = EXCLUDED.order_index,
   status = EXCLUDED.status;
 
 -- 3. Social Links
@@ -81,7 +87,7 @@ ON CONFLICT (id) DO UPDATE SET
   focus = EXCLUDED.focus;
 
 -- 5. Site Settings
-INSERT INTO site_settings (key, value, description) VALUES
+INSERT INTO site_settings (key, value, description, is_public) VALUES
 ('site_config', '{
   "site_title": "Sam Codes — AI Developer & Automation Builder",
   "meta_description": "Samarth Nimangre — student, AI developer and automation builder creating AI systems, workflows, web experiences and digital experiments.",
@@ -90,5 +96,5 @@ INSERT INTO site_settings (key, value, description) VALUES
   "analytics_enabled": true,
   "cinematic_intro_enabled": true,
   "sound_effects_enabled": true
-}'::jsonb, 'Global public site configuration and toggles')
-ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
+}'::jsonb, 'Global public site configuration and toggles', true)
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, is_public = EXCLUDED.is_public;

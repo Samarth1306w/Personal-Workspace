@@ -37,8 +37,11 @@ export const CONTACT_CONFIG = {
   GITHUB_HANDLE: "Sam-CodesAI",
 
   // Architecture Call Scheduling
-  CAL_URL: "https://cal.com/samarth/discovery",
+  CAL_URL: "https://cal.com/samarth/30min",
   CAL_LABEL: "Book Architecture Call",
+
+  // Instant Payment Gateway
+  UPI_ID: process.env.UPI_PAYMENT_ID || "6361209256@ibl",
 
   // Primary contact email address
   EMAIL_ADDRESS: "samarthknimangre@gmail.com",

@@ -31,7 +31,8 @@ import { buildingWithStack, exploringStack, coreCapabilities } from "@/data/capa
 import { socialsData } from "@/data/socials";
 import { assistantKnowledgeBase } from "@/data/assistantKnowledge";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+export const preferredRegion = "bom1";
 
 export default async function HomePage() {
   const [profile, projects, services, exploringTopics, capabilities, socials, knowledge] =

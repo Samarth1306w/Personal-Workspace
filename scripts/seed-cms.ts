@@ -35,17 +35,18 @@ export async function seedCMS(): Promise<void> {
   // 1. Services
   const services = [
     {
-      id: "ai-assistants",
-      title: "AI Chatbots & Assistants",
-      short_description: "Helpful conversational tools grounded in your real business information",
-      full_description: "Custom assistants for your website or app that answer user questions, explain products, guide visitors, and gather inquiries around the clock.",
+      id: "micro-fixes-automation",
+      title: "Micro-Fixes & Script Automation",
+      short_description: "Rapid bug fixes, Python scrapers, and webhook repairs delivered in hours",
+      full_description:
+        "For founders, store owners, and freelancers who need a quick engineering fix, API connection, data scraping script, or checkout repair without delays.",
       deliverables: [
-        "Custom system prompt tailored to your brand voice",
-        "Knowledge retrieval from your documents, FAQs, or site",
-        "Lead collection and structured inquiry handoff",
-        "Clean embed widget matching your website design",
+        "Same-day bug investigation and surgical code patch",
+        "Custom Python scraping scripts or data extractors",
+        "API webhook debugging and error alert routing",
+        "Video walkthrough or live test verification before payment",
       ],
-      typical_delivery: "2–4 days",
+      typical_delivery: "Same-day (6–12 hrs)",
       cta_label: "Start a conversation",
       cta_link: "#contact",
       is_available: true,
@@ -56,14 +57,15 @@ export async function seedCMS(): Promise<void> {
       id: "business-automation",
       title: "Workflow & Business Automation",
       short_description: "Connecting your software so repetitive tasks run themselves",
-      full_description: "Automated pipelines that connect your tools — automatically qualifying leads, routing notifications, syncing spreadsheets, and updating databases.",
+      full_description:
+        "Automated pipelines that connect your tools — automatically qualifying leads, routing notifications, syncing spreadsheets, and updating databases.",
       deliverables: [
-        "Multi-app triggers (Stripe, Slack, Notion, Airtable, Sheets)",
+        "Multi-app triggers (Stripe, Slack, WhatsApp, Notion, Airtable, Sheets)",
         "Automated lead triage and notification routing",
         "Scheduled data syncs and background batch processing",
-        "Reliable error handling and alert notifications",
+        "Reliable error handling and alert notifications to your phone",
       ],
-      typical_delivery: "2–5 days",
+      typical_delivery: "24–48 hrs",
       cta_label: "Start a conversation",
       cta_link: "#contact",
       is_available: true,
@@ -71,17 +73,18 @@ export async function seedCMS(): Promise<void> {
       status: "PUBLISHED",
     },
     {
-      id: "websites-webapps",
-      title: "Websites & Modern Web Applications",
-      short_description: "Fast, responsive web experiences designed with care",
-      full_description: "Modern, mobile-friendly landing pages and interactive web applications built with Next.js and Tailwind CSS. Focused on clarity, speed, and turning visitors into conversations.",
+      id: "ai-assistants",
+      title: "AI Chatbots & Autonomous Agents",
+      short_description: "Helpful conversational tools grounded in your real business information",
+      full_description:
+        "Custom 24/7 assistants for your website, Telegram, or WhatsApp that answer user questions, explain products, guide visitors, and gather inquiries around the clock.",
       deliverables: [
-        "Mobile-first, responsive layouts tested across screen sizes",
-        "Performance-conscious web engineering with zero bloat",
-        "Clean metadata, OpenGraph tags, and SEO foundations",
-        "Global deployment on Vercel with custom domain setup",
+        "Custom system prompt tailored to your brand voice & policies",
+        "Knowledge retrieval from your documents, FAQs, or site (RAG)",
+        "Automated lead qualification and CRM database insertion",
+        "Real-time push alerts to your personal Telegram or WhatsApp",
       ],
-      typical_delivery: "3–7 days",
+      typical_delivery: "2–4 days",
       cta_label: "Start a conversation",
       cta_link: "#contact",
       is_available: true,
@@ -89,15 +92,16 @@ export async function seedCMS(): Promise<void> {
       status: "PUBLISHED",
     },
     {
-      id: "rapid-mvps",
-      title: "Rapid Prototypes & Working MVPs",
-      short_description: "From concept to interactive software to validate your idea",
-      full_description: "For founders, creators, and teams who want to test a concept with real users. I build functional, clickable working prototypes in days so you can gather real feedback.",
+      id: "websites-webapps",
+      title: "Websites & Modern Web Applications",
+      short_description: "Fast, responsive web experiences designed with care",
+      full_description:
+        "Modern, mobile-friendly landing pages and interactive web applications built with Next.js 16 and Tailwind CSS. Focused on clarity, sub-2s load times, and turning visitors into paying clients.",
       deliverables: [
-        "Quick turnaround from idea to functional demo link",
-        "Interactive core flows to test with real users",
-        "Clean, modular TypeScript code structured to grow",
-        "Direct collaboration and regular preview updates",
+        "Mobile-first, responsive layouts tested across all screen sizes",
+        "95+ Google PageSpeed performance with zero Cumulative Layout Shift",
+        "Clean metadata, OpenGraph tags, and SEO foundations",
+        "Global deployment on Vercel with custom domain setup & SSL",
       ],
       typical_delivery: "3–5 days",
       cta_label: "Start a conversation",
@@ -106,10 +110,29 @@ export async function seedCMS(): Promise<void> {
       order_index: 4,
       status: "PUBLISHED",
     },
+    {
+      id: "rapid-mvps",
+      title: "Rapid Prototypes & Working MVPs",
+      short_description: "From concept to interactive software to validate your idea",
+      full_description:
+        "For founders, creators, and teams who want to test a concept with real users. I build functional, clickable working prototypes with auth and database in days so you can gather real feedback.",
+      deliverables: [
+        "Quick turnaround from idea to functional demo link",
+        "Interactive core flows with Supabase auth and database tables",
+        "Clean, modular TypeScript code structured to grow into production",
+        "Direct collaboration, preview links, and post-launch revision support",
+      ],
+      typical_delivery: "5–10 days",
+      cta_label: "Start a conversation",
+      cta_link: "#contact",
+      is_available: true,
+      order_index: 5,
+      status: "PUBLISHED",
+    },
   ];
 
   const { error: sErr } = await supabase.from("services").upsert(services);
-  console.log("Services seed:", sErr ? sErr.message : "OK (4 services)");
+  console.log("Services seed:", sErr ? sErr.message : "OK (5 services)");
 
   // 2. Exploring Topics
   const exploring = [
@@ -182,7 +205,7 @@ export async function seedCMS(): Promise<void> {
       id: "how-to-work-with-sam",
       question: "How can I work with Sam?",
       keywords: ["work", "hire", "contact", "reach", "collaborate", "start", "dm", "message", "telegram", "book"],
-      answer: "You can chat immediately with our 24/7 Telegram AI Qualifier (@samarth_master_bot) or DM Sam directly on Telegram (@Samarth1306), Instagram (@samarth.buildss), LinkedIn, or email samarthknimangre@gmail.com. You can also schedule an architecture session at https://cal.com/samarth/discovery.",
+      answer: "You can chat immediately with our 24/7 Telegram AI Qualifier (@samarth_master_bot) or DM Sam directly on Telegram (@Samarth1306), Instagram (@samarth.buildss), LinkedIn, or email samarthknimangre@gmail.com. You can also schedule an architecture session at https://cal.com/samarth/30min.",
       category: "CONTACT",
       order_index: 5,
       status: "PUBLISHED",
@@ -260,7 +283,7 @@ export async function seedCMS(): Promise<void> {
         },
       ],
       hero_image: "/og-image.png",
-      live_url: "/admin/inquiries",
+      live_url: "https://t.me/samarth_master_bot",
       github_url: "https://github.com/Sam-CodesAI/teleflow-agent",
     },
   ];

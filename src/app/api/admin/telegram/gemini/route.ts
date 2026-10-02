@@ -26,8 +26,8 @@ export async function GET(): Promise<NextResponse> {
 
     return NextResponse.json({
       configured: !!apiKey,
-      model: "gemini-3.1-flash-lite",
-      fallbackModel: "gemini-3.5-flash",
+      model: "gemini-2.0-flash",
+      fallbackModel: "gemini-2.0-flash-lite",
       maskedKey: apiKey ? maskApiKey(apiKey) : null,
       source,
     });

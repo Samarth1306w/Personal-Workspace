@@ -1,0 +1,16 @@
+{
+  "name": "SAM CODES — Intelligent Digital Systems & Autonomous Workflows",
+  "short_name": "SAM CODES",
+  "description": "Samarth Nimangre — AI Developer & Automation Engineer. Building autonomous agent workflows, edge webhook integrations, and production web applications.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#030712",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

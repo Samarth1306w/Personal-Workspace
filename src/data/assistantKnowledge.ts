@@ -42,7 +42,7 @@ export const assistantKnowledgeBase: KnowledgeQnA[] = [
     category: "PAYMENT",
     answer:
       "Payment terms are structured for complete client confidence:\n" +
-      "• India: Instant UPI transfer to `6361209256@ibl` or NEFT/IMPS bank transfer.\n" +
+      `• India: Instant UPI transfer to \`${process.env.UPI_PAYMENT_ID || "6361209256@ibl"}\` or NEFT/IMPS bank transfer.\n` +
       "• International: PayPal, Stripe credit card invoice, or Wise direct transfer (USD/EUR/GBP).\n" +
       "• Structure: For micro-tasks, 100% on delivery after you test the working demo. For larger projects, standard 50% deposit and 50% upon final domain launch or code handoff.",
   },
@@ -84,7 +84,7 @@ export const assistantKnowledgeBase: KnowledgeQnA[] = [
       "• Frontend: Next.js 15+, React 19, Tailwind CSS v4, Framer Motion.\n" +
       "• Backend & APIs: Node.js, TypeScript, Python (FastAPI, Playwright, BeautifulSoup).\n" +
       "• Database & Auth: Supabase (PostgreSQL, Row-Level Security, Realtime).\n" +
-      "• AI & Agents: Google Gemini 3.1 Flash, OpenAI API, LangChain, Model Context Protocol (MCP).\n" +
+      "• AI & Agents: Google Gemini 2.0 Flash, OpenAI API, LangChain, Model Context Protocol (MCP).\n" +
       "• Messaging Protocols: Baileys (WhatsApp Web Multi-Device), Telegram Bot API.",
   },
   {

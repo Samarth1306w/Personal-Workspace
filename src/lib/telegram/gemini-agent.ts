@@ -74,7 +74,7 @@ async function buildSystemPrompt(userContext?: UserContext): Promise<string> {
 • Developer: ${profileData.fullName} (${profileData.title}), based in ${profileData.location}.
 • Philosophy: Strict ZERO-FABRICATION policy. Only quote real engineering capabilities, real verified deliverables, and realistic timelines. Never invent capabilities or give false guarantees.
 • Verified Payment Pathways:
-  - India: Instant UPI transfer to '6361209256@ibl' or NEFT/IMPS
+  - India: Instant UPI transfer to '${process.env.UPI_PAYMENT_ID || "6361209256@ibl"}' or NEFT/IMPS
   - International: PayPal, Stripe invoice, or Wise
   - Terms: Micro-fixes (100% upon working demo test). Larger builds (50% deposit / 50% on launch).
 • Core Offerings & Pricing Catalog:
@@ -280,7 +280,7 @@ export async function executeGeminiTurn(
         `• Scope: ${session.leadDraft.estimatedScope || "Standard"}\n` +
         `• Contact: ${clientContact}\n` +
         `• Telegram Chat ID: ${session.chatId}\n` +
-        `• Engine: Google Gemini 3.1 Flash (Autonomous Qualification)`,
+        `• Engine: Google Gemini 2.0 Flash (Autonomous Qualification)`,
     });
 
     session.inquiryId = inquiryCreated.id;
@@ -294,7 +294,7 @@ export async function executeGeminiTurn(
       {
         chatId: session.chatId,
         service: session.leadDraft.serviceRequested,
-        model: "gemini-3.1-flash-lite",
+        model: "gemini-2.0-flash",
       }
     );
 
