@@ -328,13 +328,22 @@ export async function executeAgentTurn(
   const raw = incomingText.trim();
   const lower = raw.toLowerCase();
 
-  // 1. Check for command resets or starts
-  if (lower === "/start" || lower === "/restart" || lower === "/reset") {
+  // 1. Check for command resets or starts (including deep-link start payloads)
+  const isStart =
+    lower === "/start" ||
+    lower.startsWith("/start ") ||
+    lower === "/restart" ||
+    lower === "/reset";
+
+  if (isStart) {
     session.phase = "INITIAL";
     session.history = [];
+    const isCalcBlueprint = lower.startsWith("/start calc_") || lower.startsWith("/start scope_");
     session.leadDraft = {
       name: context?.firstName ? `${context.firstName}${context.lastName ? ` ${context.lastName}` : ""}` : undefined,
       handleOrEmail: context?.username ? `@${context.username}` : undefined,
+      serviceRequested: isCalcBlueprint ? "Custom Project Architecture" : undefined,
+      problemBrief: isCalcBlueprint ? `Configured via interactive site calculator: ${raw.replace(/^\/start\s+/i, "")}` : undefined,
     };
   }
 
@@ -388,8 +397,12 @@ export async function executeAgentTurn(
   switch (session.phase) {
     case "INITIAL": {
       const greetingName = session.leadDraft.name || (session.firstName ? session.firstName : "there");
+      const blueprintNote =
+        session.leadDraft.serviceRequested === "Custom Project Architecture"
+          ? `\n\nI see you configured a custom project blueprint on the site! Let's review the required modules and get your milestone scope locked in.`
+          : "";
       replyText =
-        `👋 Hey ${greetingName}! I'm Samarth's AI Qualifier.\n\n` +
+        `👋 Hey ${greetingName}! I'm Samarth's AI Qualifier.${blueprintNote}\n\n` +
         `Samarth builds production-ready digital systems: custom AI chatbots, multi-app workflow automations, modern Next.js web applications, and fast MVPs.\n\n` +
         `What kind of system or automation are you looking to build?`;
       session.phase = "DISCOVERY";

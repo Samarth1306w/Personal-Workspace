@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const rateLimitKey = `contact_${ip}`;
 
   // Rate limit: max 5 contact inquiries per 10 minutes per IP
-  const rateStatus = checkRateLimit(rateLimitKey, 5, 10 * 60 * 1000);
+  const rateStatus = await checkRateLimit(rateLimitKey, 5, 10 * 60 * 1000);
   if (!rateStatus.allowed) {
     return NextResponse.json(
       {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    recordFailure(rateLimitKey, 10 * 60 * 1000);
+    await recordFailure(rateLimitKey, 10 * 60 * 1000);
     return NextResponse.json(
       { success: false, error: "Invalid JSON request body." },
       { status: 400 }
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (!body || typeof body !== "object" || Array.isArray(body)) {
-    recordFailure(rateLimitKey, 10 * 60 * 1000);
+    await recordFailure(rateLimitKey, 10 * 60 * 1000);
     return NextResponse.json(
       { success: false, error: "Invalid request payload format." },
       { status: 400 }
@@ -53,20 +53,20 @@ export async function POST(req: NextRequest) {
 
     // Validate name
     if (!name || typeof name !== "string" || name.trim().length < 2) {
-      recordFailure(rateLimitKey, 10 * 60 * 1000);
+      await recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide your name (at least 2 characters)." }, { status: 400 });
     }
 
     // Validate email if provided
     const cleanEmail = typeof email === "string" && email.trim() ? email.trim() : undefined;
     if (cleanEmail && !EMAIL_REGEX.test(cleanEmail)) {
-      recordFailure(rateLimitKey, 10 * 60 * 1000);
+      await recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide a valid email address." }, { status: 400 });
     }
 
     // Validate message
     if (!message || typeof message !== "string" || message.trim().length < 5) {
-      recordFailure(rateLimitKey, 10 * 60 * 1000);
+      await recordFailure(rateLimitKey, 10 * 60 * 1000);
       return NextResponse.json({ success: false, error: "Please provide a descriptive message (at least 5 characters)." }, { status: 400 });
     }
 

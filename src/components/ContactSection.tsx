@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { socialsData, CONTACT_CONFIG, SocialLink } from "@/data/socials";
 import { soundFx } from "@/utils/sound";
 import SpotlightCard from "@/components/SpotlightCard";
@@ -150,6 +150,38 @@ export default function ContactSection({ socials = socialsData }: { socials?: So
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // 1. Listen for dynamic blueprint transfers from ProjectCalculator
+    const handleApplyScope = (e: Event) => {
+      const customEvent = e as CustomEvent<{ service?: string; message?: string }>;
+      if (customEvent.detail) {
+        setFormState((prev) => ({
+          ...prev,
+          service: customEvent.detail.service || prev.service,
+          message: customEvent.detail.message || prev.message,
+        }));
+      }
+    };
+
+    // 2. Read query/hash parameters if linked directly
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      let serviceParam = searchParams.get("service");
+      if (!serviceParam && window.location.hash.includes("?service=")) {
+        const hashQuery = window.location.hash.split("?service=")[1];
+        if (hashQuery) {
+          serviceParam = decodeURIComponent(hashQuery.split("&")[0]);
+        }
+      }
+      if (serviceParam) {
+        setFormState((prev) => ({ ...prev, service: serviceParam! }));
+      }
+    }
+
+    window.addEventListener("samcodes:apply-scope", handleApplyScope);
+    return () => window.removeEventListener("samcodes:apply-scope", handleApplyScope);
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(CONTACT_CONFIG.EMAIL_ADDRESS);
@@ -462,6 +494,7 @@ export default function ContactSection({ socials = socialsData }: { socials?: So
                   <option value="Workflow & Business Automation">Workflow &amp; Business Process Automation</option>
                   <option value="Websites & Web Applications">Website or Modern Web Application</option>
                   <option value="Rapid Prototypes & MVPs">Rapid Working Prototype / MVP</option>
+                  <option value="Custom Project Scope">Custom Project Scope &amp; Architecture</option>
                   <option value="General Collaboration">General / Academic Inquiry</option>
                 </select>
               </div>

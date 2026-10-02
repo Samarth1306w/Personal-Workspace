@@ -38,11 +38,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // 2. Sliding window rate limit per client IP (max 40 requests/minute)
     const ip = getClientIp(req);
-    const rateCheck = checkRateLimit(`tg-webhook:${ip}`, 40, 60 * 1000);
+    const rateCheck = await checkRateLimit(`tg-webhook:${ip}`, 40, 60 * 1000);
     if (!rateCheck.allowed) {
       return NextResponse.json(
         { error: "Rate limit exceeded. Try again in a minute." },
-        { status: 429 }
+        { status: 429, headers: { "Retry-After": rateCheck.resetSeconds.toString() } }
       );
     }
 

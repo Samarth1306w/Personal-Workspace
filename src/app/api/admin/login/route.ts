@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const rateLimitKey = `login_${ip}`;
 
   // 1. Check rate limit / brute-force lockout (max 5 failed attempts per 15 min)
-  const rateStatus = checkRateLimit(rateLimitKey, 5, 15 * 60 * 1000);
+  const rateStatus = await checkRateLimit(rateLimitKey, 5, 15 * 60 * 1000, { increment: false });
   if (!rateStatus.allowed) {
     return NextResponse.json(
       {
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     if (!result.success) {
       // Record failure against IP rate limiter
-      const updatedStatus = recordFailure(rateLimitKey, 15 * 60 * 1000);
+      const updatedStatus = await recordFailure(rateLimitKey, 15 * 60 * 1000);
 
       // Log security audit event
       await logAuditAction("FAILED_LOGIN_ATTEMPT", "AUTH", trimmedEmail, trimmedEmail, {
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Clear rate limit upon successful authentication
-    clearRateLimit(rateLimitKey);
+    await clearRateLimit(rateLimitKey);
 
     // Record successful login audit event
     await logAuditAction("ADMIN_LOGIN_SUCCESS", "AUTH", trimmedEmail, trimmedEmail, {

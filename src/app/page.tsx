@@ -10,6 +10,7 @@ import AboutSection from "@/components/AboutSection";
 import ExploringSection from "@/components/ExploringSection";
 import MilestonesSection from "@/components/MilestonesSection";
 import ServicesSection from "@/components/ServicesSection";
+import ProjectCalculator from "@/components/ProjectCalculator";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import AskSamAssistant from "@/components/AskSamAssistant";
@@ -32,7 +33,6 @@ import { socialsData } from "@/data/socials";
 import { assistantKnowledgeBase } from "@/data/assistantKnowledge";
 
 export const revalidate = 3600;
-export const preferredRegion = "bom1";
 
 export default async function HomePage() {
   const [profile, projects, services, exploringTopics, capabilities, socials, knowledge] =
@@ -76,6 +76,7 @@ export default async function HomePage() {
         <ExploringSection exploringTopics={exploringTopics} />
         <MilestonesSection />
         <ServicesSection services={services} />
+        <ProjectCalculator />
         <ContactSection socials={socials} />
       </main>
 

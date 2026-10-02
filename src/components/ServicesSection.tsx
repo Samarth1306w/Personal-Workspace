@@ -5,7 +5,7 @@ import { servicesData, ServiceOffering } from "@/data/services";
 import { soundFx } from "@/utils/sound";
 import SpotlightCard from "@/components/SpotlightCard";
 import MotionReveal from "@/components/MotionReveal";
-import { Wrench, ArrowUpRight, Check } from "lucide-react";
+import { Wrench, ArrowUpRight, Check, Calculator, ArrowDown } from "lucide-react";
 
 export default function ServicesSection({
   services = servicesData,
@@ -107,6 +107,29 @@ export default function ServicesSection({
           </MotionReveal>
         ))}
       </div>
+
+      {/* Interactive Calculator Callout Banner */}
+      <MotionReveal delay={0.2} className="mt-12">
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-emerald-500/10 via-sky-500/10 to-indigo-500/10 border border-white/[0.08] backdrop-blur-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-left">
+            <h4 className="text-sm sm:text-base font-bold text-white mb-1 flex items-center gap-2">
+              <Calculator size={16} className="text-emerald-400" />
+              Need a Custom Multi-Module Architecture?
+            </h4>
+            <p className="text-xs text-slate-300">
+              Calculate exact delivery turnaround, investment in ₹/$, and projected monthly team hours saved.
+            </p>
+          </div>
+          <a
+            href="#calculator"
+            onClick={() => soundFx.playChime(600, 0.08)}
+            className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer shrink-0 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d1a]"
+          >
+            <span>Launch Scope &amp; ROI Calculator</span>
+            <ArrowDown size={13} />
+          </a>
+        </div>
+      </MotionReveal>
     </section>
   );
 }

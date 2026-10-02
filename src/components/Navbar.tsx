@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Process", href: "#process" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Calculator", href: "#calculator" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -67,7 +68,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
