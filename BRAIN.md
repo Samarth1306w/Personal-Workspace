@@ -207,6 +207,12 @@ UPI_PAYMENT_ID="6361209256@ibl"
 - Added an "Open App" direct mailto action to the Direct Email card in `ContactSection.tsx`.
 - Verified live production release at [sam-codes.vercel.app](https://sam-codes.vercel.app).
 
+### Phase 6: Authenticated Gmail SMTP 2-Way Outreach Pipeline
+- Configured official Google SMTP (`smtp.gmail.com:465` SSL) via Nodemailer with 16-character App Password.
+- Added `GMAIL_USER` and `GMAIL_APP_PASSWORD` to `.env.local` and `.env.example`.
+- Created [`src/lib/email/gmail.ts`](file:///workspaces/Personal-Workspace/src/lib/email/gmail.ts) supporting connection verification, client cold outreach pitches, and automated quote follow-ups.
+- Verified live delivery with `scripts/test-gmail.ts` — confirmed successful delivery directly into `samarthknimangre@gmail.com`.
+
 ---
 
 ## 🛠️ Operational Runbook & Commands

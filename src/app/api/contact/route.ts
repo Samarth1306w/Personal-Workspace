@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createInquiry } from "@/lib/data-service";
 import { notifyAdminOnTelegram } from "@/lib/telegram/client";
 import { sendInquiryEmailNotification } from "@/lib/email/resend";
+import { appendLeadToGoogleSheet } from "@/lib/google/sheets";
 import { getClientIp, checkRateLimit, recordFailure } from "@/lib/rate-limiter";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -97,6 +98,18 @@ export async function POST(req: NextRequest) {
       service: savedInquiry.serviceRequested,
       contact: savedInquiry.email || savedInquiry.contactMethod,
       brief: savedInquiry.message,
+    });
+
+    // 3. Sync lead to Google Sheets CRM (if configured)
+    void appendLeadToGoogleSheet({
+      inquiryId: savedInquiry.id,
+      name: savedInquiry.name,
+      email: savedInquiry.email,
+      phoneOrHandle: savedInquiry.contactMethod,
+      serviceRequested: savedInquiry.serviceRequested,
+      message: savedInquiry.message,
+      source: "portfolio-web",
+      status: "NEW",
     });
 
     return NextResponse.json({
