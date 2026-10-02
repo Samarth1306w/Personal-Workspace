@@ -363,24 +363,36 @@ export default function ContactSection({ socials = socialsData }: { socials?: So
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                aria-label="Copy email address"
-                className="px-4 py-2 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 min-h-[44px]"
-              >
-                {copiedEmail ? (
-                  <>
-                    <Check size={13} className="text-emerald-400" />
-                    <span className="text-emerald-400">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={13} />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href={`mailto:${CONTACT_CONFIG.EMAIL_ADDRESS}?subject=${encodeURIComponent("Project Inquiry — SAM CODES")}`}
+                  onClick={() => soundFx.playHover()}
+                  aria-label="Open in email application"
+                  className="px-3 py-2 rounded-lg bg-white/[0.05] hover:bg-white text-slate-200 hover:text-slate-950 border border-white/[0.1] text-xs font-mono flex items-center gap-1.5 transition-all cursor-pointer min-h-[44px]"
+                >
+                  <ExternalLink size={12} />
+                  <span>Open App</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  aria-label="Copy email address"
+                  className="px-3.5 py-2 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer min-h-[44px]"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <Check size={13} className="text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={13} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
             <div className="p-4 rounded-xl bg-sky-500/5 border border-sky-500/15 text-[11px] font-mono text-slate-400 space-y-2">
