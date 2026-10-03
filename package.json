@@ -13,6 +13,7 @@
     "whatsapp:sync": "npx tsx --env-file=.env scripts/sync-whatsapp-auth.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-polly": "^3.1145.0",
     "@supabase/ssr": "^0.12.6",
     "@supabase/supabase-js": "^2.115.0",
     "@whiskeysockets/baileys": "6.7.24",
@@ -30,6 +31,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261002.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.4.1",
     "@types/nodemailer": "^8.0.2",
@@ -41,6 +43,7 @@
     "postcss": "^8.5.28",
     "supabase": "^2.116.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
   }
 }
