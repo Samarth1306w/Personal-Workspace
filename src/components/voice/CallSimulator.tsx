@@ -179,7 +179,7 @@ export function CallSimulator({ tenant }: CallSimulatorProps) {
         }),
       });
 
-      const data = await res.json();
+      const data = (await res.json()) as { rescueTriggered?: boolean };
       if (data.rescueTriggered) {
         setSmsNotification(tenant.smsRescueTemplate);
         addEvent("sms", `🚨 [Tier 4 Rescue Dispatched]: "${tenant.smsRescueTemplate}"`);

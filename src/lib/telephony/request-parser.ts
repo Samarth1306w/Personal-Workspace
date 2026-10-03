@@ -29,9 +29,11 @@ export async function parseTelephonyRequestBody(req: NextRequest): Promise<Recor
 
   if (contentType.includes("application/json")) {
     try {
-      const json = await req.json();
-      for (const [k, v] of Object.entries(json)) {
-        bodyParams[k] = String(v);
+      const json = (await req.json()) as Record<string, unknown>;
+      if (json && typeof json === "object") {
+        for (const [k, v] of Object.entries(json)) {
+          bodyParams[k] = String(v);
+        }
       }
       return bodyParams;
     } catch {
@@ -51,9 +53,11 @@ export async function parseTelephonyRequestBody(req: NextRequest): Promise<Recor
   }
 
   try {
-    const json = await req.json();
-    for (const [k, v] of Object.entries(json)) {
-      bodyParams[k] = String(v);
+    const json = (await req.json()) as Record<string, unknown>;
+    if (json && typeof json === "object") {
+      for (const [k, v] of Object.entries(json)) {
+        bodyParams[k] = String(v);
+      }
     }
   } catch {
     // continue
