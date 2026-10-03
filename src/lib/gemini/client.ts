@@ -168,8 +168,13 @@ export async function callGeminiApi(options: GeminiGenerateOptions): Promise<str
     throw new Error("GEMINI_API_KEY is not configured.");
   }
 
-  // Model preferences: prefer gemini-2.0-flash, fallback to gemini-2.0-flash-lite and gemini-1.5-flash
-  const models = ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"];
+  // Model preferences: prefer active flash-lite and flash models
+  const models = [
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash-lite",
+    "gemini-flash-latest",
+    "gemini-3.8-flash",
+  ];
   let lastError: Error | null = null;
 
   for (const model of models) {
@@ -252,7 +257,7 @@ export async function validateGeminiApiKey(apiKey: string): Promise<GeminiValida
       systemPrompt: "You are an API health verifier. Return valid JSON: {\"status\": \"ok\", \"model\": \"gemini\"}",
       messages: [{ role: "user", text: "ping" }],
       temperature: 0,
-      maxOutputTokens: 60,
+      maxOutputTokens: 256,
       responseJson: true,
       timeoutMs: 6000,
     });
@@ -260,7 +265,7 @@ export async function validateGeminiApiKey(apiKey: string): Promise<GeminiValida
     const latencyMs = Date.now() - startTime;
     return {
       valid: true,
-      model: "gemini-2.0-flash",
+      model: "gemini-flash-lite-latest",
       latencyMs,
     };
   } catch (err: unknown) {
