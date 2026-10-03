@@ -1,6 +1,7 @@
 ---
 name: modern-engineering-2026
-description: Master playbook of 2026 cutting-edge software engineering paradigms, including Next.js 16 (Cache Components, Turbopack, proxy.ts), React 19 Actions & Compiler, Tailwind CSS v4 CSS-first Oxide engine, Python 3.13+ Free-Threading (No-GIL) with uv & Pydantic v2, and Linux Foundation Model Context Protocol (MCP) stateless architectures.
+description: '2026 modern engineering playbook: Next.js 16 (Cache Components, Turbopack,
+  proxy.ts), React 19, Tailwind v4, uv, and MCP.'
 ---
 
 # Modern Software Engineering & Architecture Playbook (2026)

@@ -92,9 +92,12 @@ export function appendTranscript(
 export async function persistSessionToDatabase(session: CallSession): Promise<void> {
   try {
     const supabase = createAdminClient();
-    if (!supabase) return;
+    if (!supabase) {
+      console.warn(`[FailoverEngine] Supabase credentials not found. Cannot persist session ${session.callSid}.`);
+      return;
+    }
 
-    await supabase.from("site_settings").upsert(
+    const { error } = await supabase.from("site_settings").upsert(
       {
         key: `call_session_${session.callSid}`,
         value: session,
@@ -103,8 +106,12 @@ export async function persistSessionToDatabase(session: CallSession): Promise<vo
       },
       { onConflict: "key" }
     );
+
+    if (error) {
+      console.error(`[FailoverEngine] Supabase error persisting session ${session.callSid}: ${error.message}`);
+    }
   } catch (err) {
-    console.warn(`[FailoverEngine] Failed to persist session ${session.callSid} to DB:`, err);
+    console.error(`[FailoverEngine] Failed to persist session ${session.callSid} to DB:`, err);
   }
 }
 
