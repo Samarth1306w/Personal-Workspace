@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { ArrowDown, ArrowUpRight, Terminal, Cpu, Zap } from "lucide-react";
+import Link from "next/link";
+import { ArrowDown, ArrowUpRight, Terminal, Cpu, Zap, Mic, Phone } from "lucide-react";
 import { profileData, ProfileData } from "@/data/profile";
 import { soundFx } from "@/utils/sound";
 import { motion } from "motion/react";
@@ -29,6 +30,33 @@ export default function Hero({ profile = profileData }: { profile?: ProfileData 
         <span className="text-[11px] sm:text-xs font-mono text-slate-300">
           <TextScramble text={profile.availabilityStatus} scrambleOnHover={false} />
         </span>
+      </motion.div>
+
+      {/* Live Voice Agent Flagship Pill */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+        className="mb-8 flex flex-wrap items-center justify-center gap-2.5"
+      >
+        <Link
+          href="/demos/voice-agent"
+          onClick={() => soundFx.playHover()}
+          className="group px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400/60 text-cyan-300 text-xs font-mono flex items-center gap-2 transition-all shadow-lg shadow-cyan-500/10"
+        >
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <Mic size={13} className="text-cyan-400" />
+          <span>Live Demo: Voice AI Receptionist (WebRTC)</span>
+          <ArrowUpRight size={13} className="text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
+
+        <a
+          href="tel:+18149613703"
+          className="px-3.5 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 text-amber-300 text-xs font-mono flex items-center gap-1.5 transition-all shadow-lg shadow-amber-500/10"
+        >
+          <Phone size={12} className="text-amber-400 animate-pulse" />
+          <span>Call: +1 (814) 961-3703</span>
+        </a>
       </motion.div>
 
       {/* Main Headline */}

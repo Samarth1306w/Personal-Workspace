@@ -176,6 +176,25 @@ export default function LabSection({
                       ))}
                     </div>
                   )}
+
+                  {/* Direct interactive actions for VaniEdge */}
+                  {proj.slug === "vaniedge-voice-platform" && (
+                    <div className="mb-4 flex flex-wrap gap-2" onClick={(e) => e.stopPropagation()}>
+                      <a
+                        href="/demos/voice-agent"
+                        className="px-2.5 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-[10px] font-mono flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                        <span>🎙️ WebRTC Mic Tester</span>
+                      </a>
+                      <a
+                        href="tel:+18149613703"
+                        className="px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[10px] font-mono flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                      >
+                        <span>📞 Call Live Line</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-4 border-t border-white/[0.04] flex items-center justify-between">
