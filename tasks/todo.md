@@ -115,3 +115,48 @@
   - Description: Run full TypeScript compilation and production Next.js build.
   - Acceptance: 0 TypeScript errors, 0 ESLint errors, clean build output.
   - Verify: `npm run build`
+
+---
+
+## Phase 6: Production Transition & Live Telephony Wiring
+
+- [x] Task 6.1: Groq Llama 3.3 70B & Multi-LLM Resiliency
+  - Description: Upgraded `intent-classifier.ts` to `llama-3.3-70b-versatile` with automatic fallback to Google Gemini (`gemini-2.0-flash`), sub-1ms negation-aware emergency triage, and browser WebRTC microphone tester.
+  - Files: `lib/telephony/intent-classifier.ts`, `components/voice/WebRtcVoiceTester.tsx`
+
+- [x] Task 6.2: Production Purge & Hardening
+  - Description: Purged synthetic vitest files and mock tokens. Hardened real HMAC-SHA1 signature verification, real Twilio REST SMS, real Gmail SMTP notifications, and real Supabase session tracking.
+  - Files: `lib/telephony/sms-service.ts`, `lib/email/gmail.ts`, `lib/telephony/security.ts`
+
+- [x] Task 6.3: Live Vercel Deployment & Twilio Webhook Routing
+  - Description: Deployed `vaniedge.vercel.app` to production. Updated live PSTN phone number `+1 (814) 961-3703` via Twilio REST API to route voice calls directly to `https://vaniedge.vercel.app/api/voice/incoming`.
+  - Verify: `scripts/update-twilio-webhook.ts` executed with 200 OK.
+
+---
+
+## Phase 7: Flagship Portfolio Integration (`sam-codes.vercel.app`)
+
+- [x] Task 7.1: Interactive Hero Showcase Pill
+  - Description: Added live interactive pill linking to WebRTC voice agent demo and 1-click dial to `+1 (814) 961-3703`.
+  - Files: `src/components/Hero.tsx`
+
+- [x] Task 7.2: Direct Action Buttons in The Lab
+  - Description: Embedded 1-click action buttons (`🎙️ WebRTC Mic Tester` & `📞 Call Live Line`) directly into the VaniEdge-Pro project card.
+  - Files: `src/components/LabSection.tsx`
+
+- [x] Task 7.3: Production Verification & Vercel Rollout
+  - Description: Clean Next.js 16.3.4 Turbopack build (48/48 routes) and live Vercel production deployment aliased to `https://sam-codes.vercel.app`.
+
+---
+
+## Phase 8: Active Outreach & Job Application Pipeline
+
+- [x] Task 8.1: FitMate Coach Application (Junior Frontend Software Engineer)
+  - Description: Dispatched targeted application pitching clean UI craft, responsive design, and modern React/Next.js to `hiring@fitmatecoach.com` (cc: `team@fitmatecoach.com`). Message ID: `<0eb38874-8604-c39e-ed17-7c06f84a7bfc@gmail.com>`.
+
+- [x] Task 8.2: Aistetic Application (Junior Full Stack Engineer - Part-Time)
+  - Description: Dispatched application to `team@aistetic.com` (cc: `careers@aistetic.com`) focusing on product edge-case debugging, customer engineering, and UI reliability. Message ID: `<88602e6e-bf93-ca18-5c0b-e630b3ef77b3@gmail.com>`.
+
+- [x] Task 8.3: Billcit Application (Full Stack Developer - Next.js / TypeScript)
+  - Description: Dispatched application to founder Nirmal Surani (`nirmalsurani@gmail.com`) focusing on invoicing UI, REST API routes, and database integration. Message ID: `<4152b9e3-f207-2088-234e-76b85d0935f3@gmail.com>`.
+
