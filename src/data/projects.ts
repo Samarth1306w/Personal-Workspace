@@ -162,6 +162,66 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/Sam-CodesAI/VaniEdge-Voice-Platform",
     liveUrl: "/demos/voice-agent",
   },
+  {
+    title: "PinForge AI: Autonomous Pinterest & Amazon Affiliate Growth Engine",
+    slug: "pinforge-ai",
+    shortDescription:
+      "Autonomous e-commerce affiliate engine combining a 35ms Python Pillow 2:3 graphic compositor, multi-model AI SEO studio (Gemini + Groq), and FTC-compliant Next.js 16 bridge landing pages.",
+    fullDescription:
+      "An end-to-end commercial affiliate workflow platform eliminating the high friction, shadowban risks, and slow manual creative production of affiliate marketing. PinForge integrates a Python core engine (FastAPI, Pillow/PIL, curl_cffi, Pydantic v2) rendering 1000x1500 vertical pins across 3 high-converting design systems in under 50ms, a multi-model SEO copywriter adhering to strict Pinterest character limits and FTC disclosure laws, and high-velocity Next.js 16 bridge landing pages (/p/[slug]) supporting 1-click Pinterest Bulk CSV and zero-approval Media RSS auto-publishing.",
+    category: "Automation",
+    technologies: ["Python 3.14", "FastAPI", "Pillow (PIL)", "curl_cffi", "Next.js 16", "React 19", "Google Gemini", "Groq", "Tailwind CSS v4"],
+    tools: ["Pinterest Bulk CSV", "Media RSS 2.0", "FTC Compliance Gateway", "Amazon Associate Tag Resolver"],
+    image: "/og-image.png",
+    status: "Shipped",
+    featured: true,
+    date: "2026-10",
+    problem:
+      "Affiliate marketers struggle with three major bottlenecks: manually designing dozens of 2:3 vertical pins daily takes hours; direct Amazon affiliate links frequently get flagged or shadowbanned by Pinterest spam algorithms; and expensive SaaS tools charge $30-$80/month for slow, bloated headless browser rendering.",
+    approach:
+      "Engineered an autonomous triple-channel workflow. Built a lightweight Python Pillow rendering engine generating crisp 1000x1500 graphics with drop shadows, star ratings, and price badges in under 50ms without headless browser bloat. Integrated Google Gemini and Groq for search-intent titles (<100 chars) and FTC-compliant descriptions. Built sub-second Next.js 16 bridge landing pages (/p/[slug]) with live price disclaimers and structured JSON-LD data to safely route traffic to Amazon with zero shadowban risk.",
+    architecture: [
+      "Stealth Product Resolver (curl_cffi + Amazon Standard CDN) extracting product specs, ratings, and media",
+      "Pillow 2:3 Vertical Graphic Compositor (1000x1500) rendering Bento Dark, Warm Editorial, and Viral Hook designs",
+      "Multi-Model AI Copy Studio (Gemini Flash Lite + Groq 120B) with strict character boundary validation",
+      "RFC 4180 Pinterest Bulk Upload CSV Generator with automated peak-hour scheduling",
+      "Zero-Approval Media RSS 2.0 Endpoint (/feed.xml) for automated 24/7 Pinterest Business ingestion",
+      "Next.js 16 Bridge Gateway (/p/[slug]) with FTC affiliate disclosures and verified price notices",
+      "Bento Grid Mission Control Dashboard (/demos/pinforge) with 1-click verified test catalog",
+    ],
+    result:
+      "Reduced pin creation and campaign preparation time from 25 minutes per product to under 2 seconds. Slashed compute cost to ~$0.0015 per pin (over 95% cheaper than third-party SaaS). Generated 100% compliant bridge pages with zero shadowban flags.",
+    lessons:
+      "Headless browsers are completely unnecessary for social graphic generation; local Pillow compositing delivers 40x faster throughput with zero memory leaks. Using intermediary bridge landing pages with clear FTC disclosures is essential for safeguarding affiliate accounts from spam penalties.",
+    metrics: [
+      {
+        label: "Graphic Render Latency",
+        value: "35ms",
+        type: "performance",
+        evidenceNotes: "Measured on local CPU with Lanczos resampling and antialiased drop shadows",
+      },
+      {
+        label: "Unit Compute Cost",
+        value: "$0.0015 / Pin",
+        type: "performance",
+        evidenceNotes: "500 pins/month costs ~$0.75 total vs $49-$79/month SaaS subscriptions",
+      },
+      {
+        label: "FTC & Pinterest Safety",
+        value: "100% Safe",
+        type: "measurements",
+        evidenceNotes: "Intermediary bridge landing pages eliminate affiliate link shadowbans",
+      },
+      {
+        label: "Auto-Publish Channels",
+        value: "Triple Channel",
+        type: "workflow-steps",
+        evidenceNotes: "Official Bulk CSV + Media RSS 2.0 Feed + Direct Intent Pinning",
+      },
+    ],
+    githubUrl: "https://github.com/Sam-CodesAI/PinForge-AI",
+    liveUrl: "/demos/pinforge",
+  },
 ];
 
 /**

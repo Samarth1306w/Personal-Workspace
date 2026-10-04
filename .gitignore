@@ -18,6 +18,8 @@ __pycache__/
 venv/
 .venv/
 env/
+python_engine/static/pins/*.jpg
+python_engine/static/pins/*.png
 
 # Node / Build artifacts
 node_modules/

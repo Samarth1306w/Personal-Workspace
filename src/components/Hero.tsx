@@ -32,7 +32,7 @@ export default function Hero({ profile = profileData }: { profile?: ProfileData 
         </span>
       </motion.div>
 
-      {/* Live Voice Agent Flagship Pill */}
+      {/* Live Showcase Flagship Pills */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -40,13 +40,24 @@ export default function Hero({ profile = profileData }: { profile?: ProfileData 
         className="mb-8 flex flex-wrap items-center justify-center gap-2.5"
       >
         <Link
+          href="/demos/pinforge"
+          onClick={() => soundFx.playHover()}
+          className="group px-3.5 py-1.5 rounded-full bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 hover:border-rose-400/60 text-rose-300 text-xs font-mono flex items-center gap-2 transition-all shadow-lg shadow-rose-500/10"
+        >
+          <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+          <Zap size={13} className="text-rose-400" />
+          <span>New: PinForge AI (Pinterest + Amazon)</span>
+          <ArrowUpRight size={13} className="text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
+
+        <Link
           href="/demos/voice-agent"
           onClick={() => soundFx.playHover()}
           className="group px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400/60 text-cyan-300 text-xs font-mono flex items-center gap-2 transition-all shadow-lg shadow-cyan-500/10"
         >
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-cyan-400" />
           <Mic size={13} className="text-cyan-400" />
-          <span>Live Demo: Voice AI Receptionist (WebRTC)</span>
+          <span>Voice AI Receptionist</span>
           <ArrowUpRight size={13} className="text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
 
@@ -55,7 +66,7 @@ export default function Hero({ profile = profileData }: { profile?: ProfileData 
           className="px-3.5 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 text-amber-300 text-xs font-mono flex items-center gap-1.5 transition-all shadow-lg shadow-amber-500/10"
         >
           <Phone size={12} className="text-amber-400 animate-pulse" />
-          <span>Call: +1 (814) 961-3703</span>
+          <span>+1 (814) 961-3703</span>
         </a>
       </motion.div>
 
