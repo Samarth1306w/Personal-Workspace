@@ -40,6 +40,9 @@ sam-codeai-manager/
 .linkedin-tokens.json
 VaniEdge-Voice-Platform/
 PinForge-AI/
+smart-spaces/
+smart-spaces-local/
+.canva*
 .seen-leads.json
 .whatsapp-auth/
 designs/

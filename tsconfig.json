@@ -38,6 +38,8 @@
   "exclude": [
     "node_modules",
     "VaniEdge-Voice-Platform",
-    "PinForge-AI"
+    "PinForge-AI",
+    "smart-spaces",
+    "smart-spaces-local"
   ]
 }
